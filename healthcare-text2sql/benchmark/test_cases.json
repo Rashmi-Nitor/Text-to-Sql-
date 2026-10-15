@@ -1,0 +1,50 @@
+[
+  {
+    "question": "How many patients are diagnosed with Diabetes?",
+    "gold_sql": "SELECT COUNT(DISTINCT patient_id) FROM appointments a JOIN diagnoses d ON a.diagnosis_id=d.diagnosis_id WHERE d.diagnosis_name='Diabetes';"
+  },
+  {
+    "question": "List all Cardiology specialists.",
+    "gold_sql": "SELECT doctor_name FROM doctors WHERE specialization='Cardiology';"
+  },
+  {
+    "question": "How many patients are from New York?",
+    "gold_sql": "SELECT COUNT(*) FROM patients WHERE city='New York';"
+  },
+  {
+    "question": "List all patients diagnosed with Hypertension.",
+    "gold_sql": "SELECT DISTINCT p.patient_id, p.first_name, p.last_name FROM patients p JOIN appointments a ON p.patient_id=a.patient_id JOIN diagnoses d ON a.diagnosis_id=d.diagnosis_id WHERE d.diagnosis_name='Hypertension';"
+  },
+  {
+    "question": "What is the total number of prescriptions for Ibuprofen?",
+    "gold_sql": "SELECT COUNT(*) FROM prescriptions pr JOIN medications m ON pr.medication_id=m.medication_id WHERE m.medication_name='Ibuprofen';"
+  },
+  {
+    "question": "Which doctors specialize in Neurology?",
+    "gold_sql": "SELECT doctor_name FROM doctors WHERE specialization='Neurology';"
+  },
+  {
+    "question": "How many appointments were recorded for each diagnosis?",
+    "gold_sql": "SELECT d.diagnosis_name, COUNT(*) AS appointment_count FROM diagnoses d JOIN appointments a ON d.diagnosis_id=a.diagnosis_id GROUP BY d.diagnosis_name ORDER BY appointment_count DESC;"
+  },
+  {
+    "question": "Find the doctor names with more than 3 unique patients.",
+    "gold_sql": "SELECT doc.doctor_name, COUNT(DISTINCT a.patient_id) AS patient_count FROM appointments a JOIN doctors doc ON a.doctor_id=doc.doctor_id GROUP BY doc.doctor_name HAVING COUNT(DISTINCT a.patient_id)>3;"
+  },
+  {
+    "question": "List medication names that were prescribed more than once.",
+    "gold_sql": "SELECT m.medication_name, COUNT(p.prescription_id) AS prescription_count FROM prescriptions p JOIN medications m ON p.medication_id=m.medication_id GROUP BY m.medication_name HAVING COUNT(*)>1 ORDER BY prescription_count DESC;"
+  },
+  {
+    "question": "Which patients are female and live in Boston?",
+    "gold_sql": "SELECT first_name, last_name FROM patients WHERE gender='Female' AND city='Boston';"
+  },
+  {
+    "question": "Which medications are of type Antibiotic?",
+    "gold_sql": "SELECT medication_name FROM medications WHERE medication_type='Antibiotic';"
+  },
+  {
+    "question": "Show doctors and the number of patients they treated for Diabetes.",
+    "gold_sql": "SELECT doc.doctor_name, COUNT(DISTINCT a.patient_id) AS patient_count FROM appointments a JOIN diagnoses d ON a.diagnosis_id=d.diagnosis_id JOIN doctors doc ON a.doctor_id=doc.doctor_id WHERE d.diagnosis_name='Diabetes' GROUP BY doc.doctor_name ORDER BY patient_count DESC;"
+  }
+]
