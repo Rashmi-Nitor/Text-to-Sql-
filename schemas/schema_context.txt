@@ -1,0 +1,54 @@
+Table: patients
+Columns:
+- patient_id (PK)
+- first_name
+- last_name
+- gender
+- age
+- city
+- registration_date
+
+Table: doctors
+Columns:
+- doctor_id (PK)
+- doctor_name
+- specialization
+- experience_years
+
+Table: diagnoses
+Columns:
+- diagnosis_id (PK)
+- diagnosis_name
+- severity
+ 
+Table: appointments
+Columns:
+- appointment_id (PK)
+- patient_id (FK -> patients.patient_id)
+- doctor_id (FK -> doctors.doctor_id)
+- diagnosis_id (FK -> diagnoses.diagnosis_id)
+- appointment_date
+- appointment_status
+
+Table: medications
+Columns:
+- medication_id (PK)
+- medication_name
+- medication_type
+- manufacturer
+
+Table: prescriptions
+Columns:
+- prescription_id (PK)
+- appointment_id (FK -> appointments.appointment_id)
+- medication_id (FK -> medications.medication_id)
+- dosage
+- duration_days
+ 
+Relationships:
+ 
+patients -> appointments
+doctors -> appointments
+diagnoses -> appointments
+appointments -> prescriptions
+medications -> prescriptions
