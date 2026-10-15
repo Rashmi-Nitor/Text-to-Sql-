@@ -1,7 +1,7 @@
 import sqlite3
 from pathlib import Path
 
-database_path = Path(__file__).resolve().parent / "healthcare.db"
+database_path = Path(__file__).resolve().parent / "data" / "healthcare.db"
 conn = sqlite3.connect(database_path)
 cursor = conn.cursor()
 
